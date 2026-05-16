@@ -80,13 +80,12 @@ jobs:
       run: |
         7z x android_libs.7z -aoa -oC:\android
 
-    - name: Install android
+    - name: Verify NDK
       run: |
-        $sdkRoot = "C:\Android\android-sdk"
-        $sdkManager = "$sdkRoot\cmdline-tools\latest\bin\sdkmanager.bat"
-        Install-AndroidSDKPackages -AndroidSDKManagerPath $sdkManager `
-                                  -AndroidSDKRootPath $sdkRoot `
-                                  -AndroidPackages "ndk;21.4.7075529"
+        if (-not (Test-Path "C:\Android\android-sdk\ndk\21.4.7075529")) {
+          throw "NDK 21.4.7075529 not found at C:\Android\android-sdk\ndk\21.4.7075529"
+        }
+        Write-Host "NDK found at C:\Android\android-sdk\ndk\21.4.7075529"
 
     - name: Build for android ARM64 (64 bits)
       timeout-minutes: 30
