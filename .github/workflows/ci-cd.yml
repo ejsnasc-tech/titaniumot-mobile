@@ -59,7 +59,7 @@ jobs:
 
   Android:
     name: Build android version (32 + 64 bits)
-    runs-on: windows-2019
+    runs-on: self-hosted
     timeout-minutes: 90
 
     steps:
