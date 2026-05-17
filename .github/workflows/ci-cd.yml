@@ -74,6 +74,14 @@ jobs:
         echo "$msbuildPath" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
         Write-Host "MSBuild path added: $msbuildPath"
 
+    - name: Copy Tibia game files
+      run: |
+        $src = "C:\Users\JOGOS\Desktop\PROJETOOTSERVE\titaniumot-build\data\things\860"
+        New-Item -ItemType Directory -Force "data\things\860" | Out-Null
+        Copy-Item "$src\Tibia.dat" "data\things\860\" -Force
+        Copy-Item "$src\Tibia.spr" "data\things\860\" -Force
+        Write-Host "Tibia.dat e Tibia.spr copiados"
+
     - name: Create data.zip for android
       run: |
         powershell -ExecutionPolicy Bypass -File .\create_android_assets.ps1
