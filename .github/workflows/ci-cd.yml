@@ -78,6 +78,7 @@ jobs:
 
     - name: Decompress android libs
       run: |
+        $env:PATH = "C:\Program Files\7-Zip;$env:PATH"
         7z x android_libs.7z -aoa -oC:\android
 
     - name: Verify NDK
