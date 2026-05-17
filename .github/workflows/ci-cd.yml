@@ -68,9 +68,11 @@ jobs:
       with:
           submodules: recursive
 
-    - name: Setup MSBuild and add to PATH
-      uses: microsoft/setup-msbuild@v2
-      id: setup_msbuild
+    - name: Add MSBuild to PATH
+      run: |
+        $msbuildPath = "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin"
+        echo "$msbuildPath" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+        Write-Host "MSBuild path added: $msbuildPath"
 
     - name: Create data.zip for android
       run: |
